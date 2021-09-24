@@ -5,12 +5,21 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import "./styles/app.scss";
 import reportWebVitals from "./reportWebVitals";
+import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
+import { WeatherProvider } from "./context/weather-context";
+
+const theme = createTheme();
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <WeatherProvider>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <App />
+      </ThemeProvider>
+    </WeatherProvider>
   </React.StrictMode>,
-  document.getElementById("root"),
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function
