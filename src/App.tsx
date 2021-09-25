@@ -4,7 +4,6 @@ import { fetchData, fetchToday, fetchZipCode } from "./api";
 import AppTopBar from "./components/AppTopBar";
 import CurrentWeather from "./components/CurrentWeather";
 import WeatherCard from "./components/WeatherCard";
-import { WeatherStateContext } from "./context/weather-context";
 
 interface Props {}
 interface State {
@@ -17,7 +16,6 @@ interface State {
 }
 
 export default class App extends Component<Props, State> {
-  static contextType = WeatherStateContext;
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -31,7 +29,11 @@ export default class App extends Component<Props, State> {
   }
 
   async componentDidMount() {
-    //  const { state } = this.context;
+    // navigator.geolocation.getCurrentPosition(async (position) => {
+    //     const fetchZipCodeData = await fetchLatLongCode(
+    //       position.coords.latitude,
+    //       position.coords.longitude
+    //     );
     const fetchZipCodeData = await fetchZipCode(Number(this.state.zip_code));
     this.setState({ location: fetchZipCodeData });
     this.handleZipCodeChange(this.state.zip_code);

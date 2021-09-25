@@ -54,17 +54,17 @@ export const CurrentWeather = ({ weather }: Props) => {
         {weather[2]}
       </Typography>
 
-      <Button
+      {/* <Button
         style={{ marginTop: "20px" }}
         onClick={() => toggleDetailDrawer()}
       >
         Details
-      </Button>
-      <WeatherDetails
+      </Button> */}
+      {/* <WeatherDetails
         open={detailDrawerOpen}
         onClose={toggleDetailDrawer}
         weather={weather}
-      />
+      /> */}
     </Box>
   );
 };

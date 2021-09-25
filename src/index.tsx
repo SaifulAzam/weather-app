@@ -6,18 +6,15 @@ import App from "./App";
 import "./styles/app.scss";
 import reportWebVitals from "./reportWebVitals";
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
-import { WeatherProvider } from "./context/weather-context";
 
 const theme = createTheme();
 
 ReactDOM.render(
   <React.StrictMode>
-    <WeatherProvider>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <App />
-      </ThemeProvider>
-    </WeatherProvider>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <App />
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

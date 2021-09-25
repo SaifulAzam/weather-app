@@ -9,7 +9,6 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
-import { useWeather } from "../context/weather-context";
 
 interface Props {
   show: boolean;
