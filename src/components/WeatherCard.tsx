@@ -34,8 +34,6 @@ export const WeatherCard = (props: Props) => {
   };
   const renderWeatherItem = () => {
     return props.weather.map((item: any) => {
-      console.log(item[0].toString().substring(0, 15));
-
       return (
         <Grid
           key={item[0]}
@@ -76,7 +74,16 @@ export const WeatherCard = (props: Props) => {
   };
   return (
     <div className="weather-card">
-      <Grid container>{renderWeatherItem()}</Grid>
+      <Grid
+        container
+        display="flex"
+        justifyContent="space-around"
+        position="absolute"
+        bottom={0}
+        padding="10px"
+      >
+        {renderWeatherItem()}
+      </Grid>
     </div>
   );
 };

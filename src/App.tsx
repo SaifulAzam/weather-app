@@ -56,10 +56,11 @@ export default class App extends Component<Props, State> {
     // Add the data for today with the forecast
     // as forecast data excludes data for the present day
     //@ts-ignore
-    const allData = todayData.concat(fetchedData.futuredays);
+    // const allData = todayData.concat(fetchedData.futuredays);
 
     this.setState({
-      data: allData,
+      //@ts-ignore
+      data: fetchedData.futuredays,
       //@ts-ignore
       todayData: todayData[0],
       appLoading: false,
@@ -71,6 +72,12 @@ export default class App extends Component<Props, State> {
     if (validation !== "Error") {
       this.handleZipCodeChange(this.state.zip_code);
       this.handleSearchLocationDialog();
+      if (this.state.zip_code.toString().length === 5) {
+        const fetchZipCodeData = await fetchZipCode(
+          Number(this.state.zip_code)
+        );
+        this.setState({ location: fetchZipCodeData });
+      }
     }
   };
 
@@ -101,8 +108,6 @@ export default class App extends Component<Props, State> {
             <CurrentWeather weather={this.state.todayData} />
           ) : null}
           <WeatherCard weather={this.state?.data} />
-
-          {/* <div className="bg frosty_bg"></div> */}
         </div>
       </div>
     );
