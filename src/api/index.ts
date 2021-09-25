@@ -23,7 +23,6 @@ export const fetchZipCode = async (zip: number) => {
 
 export const fetchToday = async (zip_code: number) => {
     // Fetch weather data for today
-    // Get date, main forecast, description
     try {
         const { data: { dt, name, main, weather } } = await axios.get(`${todayURL}?zip=${zip_code}&appid=${API_KEY}`);
         var today = [];
@@ -42,9 +41,9 @@ export const fetchToday = async (zip_code: number) => {
 
 export const fetchData = async (zip_code: number) => {
     // Fetch data for 5 day forecast
-    // Get data for date, temperature, weather description
     try {
-        const { data: { city: { name }, list } } = await axios.get(`${url}?zip=${zip_code}&appid=${API_KEY}`);
+        const { data: { city, list } } = await axios.get(`${url}?zip=${zip_code}&appid=${API_KEY}`);
+
         var i;
         var days = [];
 
@@ -60,9 +59,10 @@ export const fetchData = async (zip_code: number) => {
         }
 
         const selectedData = {
-            cityname: name,
+            city,
             futuredays: days
         }
+
         return selectedData;
 
     } catch (error) {

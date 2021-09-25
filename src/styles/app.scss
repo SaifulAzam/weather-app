@@ -14,6 +14,29 @@ body {
   background: linear-gradient(#0f2129, #47334a);
 }
 
+.night_bg {
+  background: #0f2129;
+  background: -webkit-linear-gradient(#0f2129, #47334a);
+  background: -o-linear-gradient(#0f2129, #47334a);
+  background: -moz-linear-gradient(#0f2129, #47334a);
+  background: linear-gradient(#0f2129, #47334a);
+}
+
+.frosty_bg {
+  background: #29386f;
+  background: -webkit-linear-gradient(#29386f, #b8f5ff);
+  background: -o-linear-gradient(#29386f, #b8f5ff);
+  background: -moz-linear-gradient(#29386f, #b8f5ff);
+  background: linear-gradient(#29386f, #b8f5ff);
+}
+.sunny_bg {
+  background: #ffbd3f;
+  background: -webkit-linear-gradient(#ffbd3f, #fff097);
+  background: -o-linear-gradient(#ffbd3f, #fff097);
+  background: -moz-linear-gradient(#ffbd3f, #fff097);
+  background: linear-gradient(#ffbd3f, #fff097);
+}
+
 .weather {
   .container {
     width: 100%;

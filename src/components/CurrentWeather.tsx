@@ -1,5 +1,5 @@
 import { Box } from "@mui/system";
-import React from "react";
+import React, { useState } from "react";
 import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import { Button, Typography } from "@mui/material";
 import suncon from "../images/suncon.png";
@@ -20,6 +20,8 @@ type IconProps = {
 };
 
 export const CurrentWeather = ({ weather }: Props) => {
+  const [detailDrawerOpen, setDetailDrawerOpen] = useState(false);
+
   var weathericons: IconProps = {
     Clouds: cloudcon,
     Clear: suncon,
@@ -27,6 +29,10 @@ export const CurrentWeather = ({ weather }: Props) => {
     Rain: heavyraincon,
     Thunderstorm: lightningcon,
     Smoke: smokecon,
+  };
+
+  const toggleDetailDrawer = () => {
+    setDetailDrawerOpen(!detailDrawerOpen);
   };
 
   return (
@@ -48,8 +54,17 @@ export const CurrentWeather = ({ weather }: Props) => {
         {weather[2]}
       </Typography>
 
-      <Button style={{ marginTop: "20px" }}>Details</Button>
-      {/* <WeatherDetails open={true} /> */}
+      <Button
+        style={{ marginTop: "20px" }}
+        onClick={() => toggleDetailDrawer()}
+      >
+        Details
+      </Button>
+      <WeatherDetails
+        open={detailDrawerOpen}
+        onClose={toggleDetailDrawer}
+        weather={weather}
+      />
     </Box>
   );
 };
