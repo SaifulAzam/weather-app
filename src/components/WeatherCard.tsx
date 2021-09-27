@@ -14,6 +14,7 @@ import lightningcon from "../images/lightningcon.png";
 import heavyraincon from "../images/heavyraincon.png";
 import smokecon from "../images/smokecon.png";
 import moment from "moment";
+import { WeatherModel } from "../model";
 
 interface Props {
   weather: any;
@@ -33,10 +34,10 @@ export const WeatherCard = (props: Props) => {
     Smoke: smokecon,
   };
   const renderWeatherItem = () => {
-    return props.weather.map((item: any) => {
+    return props.weather.map((item: WeatherModel) => {
       return (
         <Grid
-          key={item[0]}
+          key={item.date}
           item
           component={Card}
           xs={12}
@@ -52,26 +53,31 @@ export const WeatherCard = (props: Props) => {
               component="p"
               style={{ textTransform: "uppercase", fontWeight: "bold" }}
             >
-              {moment(item[0]).format("ddd")}
+              {moment(item.date).format("ddd")}
             </Typography>
             <CardMedia
               className="image"
               component="img"
               alt="Sun"
-              image={weathericons[item[2].toString()]}
+              image={weathericons[item.main.toString()]}
             />
             <Typography gutterBottom variant="h5" component="h2" align="center">
-              {Number.parseInt(item[1]) + "°"}
+              {Number.parseInt(item.feels_like) + "°"}
             </Typography>
 
             <Typography variant="body2" color="textSecondary" align="center">
-              {item[2]}
+              {item.main}
             </Typography>
           </CardContent>
         </Grid>
       );
     });
   };
+
+  if (!props.weather) {
+    return null;
+  }
+
   return (
     <div className="weather-card">
       <Grid

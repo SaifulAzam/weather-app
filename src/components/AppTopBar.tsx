@@ -1,34 +1,24 @@
-import {
-  AppBar,
-  Box,
-  Button,
-  IconButton,
-  Toolbar,
-  Typography,
-} from "@mui/material";
-import React from "react";
-import CameraIcon from "@mui/icons-material/PhotoCamera";
+import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
+import React, { useContext } from "react";
 import { LocationModel } from "../model";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import SearchLocationDialog from "./SearchLocationDialog";
+import { WeatherAppContext } from "../context/AppContext";
+import Tooltip from "@mui/material/Tooltip";
 
-interface Props {
-  location: LocationModel;
-  searchDialogVisibility: boolean;
-  handelSearchDialogChange: any;
-  zip_code?: number;
-  onChangeZipCode?: any;
-  onSubmit?: any;
-}
+interface Props {}
 
-export const AppTopBar = ({
-  location,
-  searchDialogVisibility,
-  handelSearchDialogChange,
-  zip_code,
-  onChangeZipCode,
-  onSubmit,
-}: Props) => {
+export const AppTopBar = ({}: Props) => {
+  const [searchDialogVisibility, setSearchDialogVisibility] =
+    React.useState(false);
+
+  const weatherContext = useContext(WeatherAppContext);
+  const location = weatherContext?.location;
+
+  const handleSearchDialog = () => {
+    setSearchDialogVisibility(!searchDialogVisibility);
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
@@ -40,18 +30,17 @@ export const AppTopBar = ({
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Weather App
           </Typography>
-          <Button
-            onClick={handelSearchDialogChange}
-            color="inherit"
-            endIcon={<KeyboardArrowDownIcon />}
-          >{`${location.City}, ${location.State}`}</Button>
+          <Tooltip title="Search Location" arrow disableInteractive={true}>
+            <Button
+              onClick={handleSearchDialog}
+              color="inherit"
+              endIcon={<KeyboardArrowDownIcon />}
+            >{`${location?.City}, ${location?.State}`}</Button>
+          </Tooltip>
         </Toolbar>
         <SearchLocationDialog
-          zip_code={zip_code}
-          onChangeZipCode={onChangeZipCode}
           show={searchDialogVisibility}
-          handleClose={handelSearchDialogChange}
-          onSubmit={onSubmit}
+          handleClose={handleSearchDialog}
         />
       </AppBar>
     </Box>

@@ -6,3 +6,11 @@ export interface LocationModel {
     ZipCode: string
     County: string
 }
+
+export interface WeatherModel {
+    date: string
+    description: string
+    feels_like: string
+    icon: string
+    main: string
+}
