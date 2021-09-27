@@ -47,6 +47,7 @@ const AppProvider = ({ children }: WeatherProviderProps) => {
     const zipCodeData = await fetchZipCode(Number(zipCode));
     const todayWeatherData = await fetchToday(Number(zipCode));
     const fetchWeatherData = await fetchData(Number(zipCode));
+
     setLocation(zipCodeData);
     //@ts-ignore
     setCurrentWeatherData(todayWeatherData[0]);

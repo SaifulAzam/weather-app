@@ -21,38 +21,11 @@ export const fetchZipCode = async (zip: number) => {
 
 }
 
-export const fetchLatLongCode = async (lat: any, long: any) => {
-    try {
-        // Fetch data from zip code API
-        const { data } = await axios.get(`FindZipCodesInRadius/ByLatLon?latitude=${lat}&longitude=${long}?key=${ZIP_KEY}`);
-        if (!data.Error) {
-            console.log(data);
-
-            return data;
-        }
-        return "Error";
-
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-export const fetchCurrentPositionToday = async (lat: any, long: any) => {
-    try {
-        const { data: { dt, name, main, weather } } = await axios.get(`${todayURL}?lat=${lat}&lon=${long}&appid=${API_KEY}`);
-        return tempDataChange(weather, dt, main);
-    } catch (error) {
-        console.log(error);
-    }
-}
-
 export const fetchToday = async (zip_code: number) => {
     // Fetch weather data for today
     try {
         const { data: { dt, name, main, weather } } = await axios.get(`${todayURL}?zip=${zip_code}&appid=${API_KEY}`);
-
         return tempDataChange(weather, dt, main)
-
     } catch (error) {
         console.log(error);
     }

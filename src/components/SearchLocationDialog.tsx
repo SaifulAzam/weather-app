@@ -17,19 +17,25 @@ interface Props {
 
 export const SearchLocationDialog = ({ show, handleClose }: Props) => {
   const weatherContext = React.useContext(WeatherAppContext);
-  const [zipCode, setZipCode] = React.useState<number | undefined>(undefined);
+  const [zipCode, setZipCode] = React.useState("");
+  const [error, setError] = React.useState("");
 
   const handleZipCodeChange = (
     event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => {
     if (event.target.value) {
-      setZipCode(Number(event.target.value));
+      setZipCode(event.target.value);
     }
+    setError("");
   };
 
   const onSubmitZipCode = () => {
-    weatherContext?.updateZipCode(zipCode);
-    handleClose();
+    if (zipCode.toString().length >= 5) {
+      weatherContext?.updateZipCode(Number(zipCode));
+      handleClose();
+    } else {
+      setError("you entered wrong zip code");
+    }
   };
 
   return (
@@ -51,6 +57,8 @@ export const SearchLocationDialog = ({ show, handleClose }: Props) => {
             fullWidth
             variant="standard"
             onChange={handleZipCodeChange}
+            error={error ? true : false}
+            helperText={error ? error : ""}
           />
         </Box>
       </DialogContent>
